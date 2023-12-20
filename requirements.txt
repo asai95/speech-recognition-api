@@ -1,0 +1,9 @@
+-e ".[whisper,gcs,celery,huey]"
+coverage
+httpx
+mypy
+pre-commit
+pytest
+pytest-celery
+pytest-lazy-fixture
+ruff
