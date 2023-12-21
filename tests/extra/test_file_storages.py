@@ -8,6 +8,7 @@ import pytest
     [
         pytest.lazy_fixture("local_storage"),
         pytest.lazy_fixture("google_cloud_storage"),
+        pytest.lazy_fixture("s3_storage"),
     ],
 )
 def test_file_storage(storage, audio_file_generator):

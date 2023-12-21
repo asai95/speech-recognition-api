@@ -7,6 +7,7 @@ from speech_recognition_api.extra.celery_bus import CeleryMessageBus
 from speech_recognition_api.extra.google_cloud_storage import GoogleCloudStorage
 from speech_recognition_api.extra.huey_bus import HueyMessageBus
 from speech_recognition_api.extra.local_storage import LocalStorage
+from speech_recognition_api.extra.s3_storage.s3_storage import S3Storage
 from speech_recognition_api.extra.whisper_model import WhisperModel
 
 TEST_OUTPUT = "Test"
@@ -41,6 +42,19 @@ def google_cloud_storage(audio_file_generator):
     storage = GoogleCloudStorage()
     storage.client = mock_client
     return storage
+
+
+@pytest.fixture()
+def s3_storage(audio_file_generator):
+    mock_resource = MagicMock()
+    mock_bucket = MagicMock()
+
+    def load_into_file(Fileobj, *args, **kwargs):  # noqa: N803
+        Fileobj.write(next(audio_file_generator()).read())
+
+    mock_bucket.download_fileobj = load_into_file
+    mock_resource.Bucket.return_value = mock_bucket
+    return S3Storage(resource=mock_resource)
 
 
 @pytest.fixture()
