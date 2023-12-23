@@ -171,5 +171,14 @@ exclude = [
 ]
 
 [[tool.mypy.overrides]]
-module = ["google.*", "pydub", "transformers", "huey.*", "celery.*", "boto3_type_annotations.*", "boto3"]
+module = [
+    "google.*",
+    "pydub",
+    "transformers",
+    "huey.*",
+    "celery.*",
+    "boto3_type_annotations.*",
+    "boto3",
+    "uvicorn",
+]
 ignore_missing_imports = true
