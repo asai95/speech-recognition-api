@@ -1,3 +1,9 @@
+[![PyPI - Version](https://img.shields.io/pypi/v/speech-recognition-api?color=%2300CD00)](https://pypi.org/project/speech-recognition-api/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/speech-recognition-api)](https://pypi.org/project/speech-recognition-api/)
+[![PyPI - License](https://img.shields.io/pypi/l/speech-recognition-api)](https://pypi.org/project/speech-recognition-api/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/speech-recognition-api)](https://pypi.org/project/speech-recognition-api/)
+[![codecov](https://codecov.io/gh/asai95/speech-recognition-api/branch/master/graph/badge.svg)](https://codecov.io/gh/asai95/speech-recognition-api)
+
 ## Speech Recognition API
 
 Simple but extensible API for Speech Recognition.
