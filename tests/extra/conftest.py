@@ -1,3 +1,4 @@
+from pathlib import Path
 from unittest.mock import MagicMock
 
 import pytest
@@ -16,7 +17,12 @@ TEST_OUTPUT = "Test"
 @pytest.fixture()
 def audio_file_generator():
     def file_opener():
-        f = open("extra/test_data/audio.wav", "rb")
+        current_dir = Path(__name__).parent
+        if current_dir.absolute().match("tests"):
+            audio_path = current_dir / "extra" / "test_data" / "audio.wav"
+        else:
+            audio_path = current_dir / "tests" / "extra" / "test_data" / "audio.wav"
+        f = open(audio_path, "rb")
         yield f
         f.close()
 
