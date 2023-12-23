@@ -57,7 +57,7 @@ def s3_storage(audio_file_generator):
 
 @pytest.fixture()
 def celery_config():
-    return {"broker_url": "amqp://", "result_backend": "redis://"}
+    return {"broker_url": "memory://", "result_backend": "db+sqlite:///celery.sqlite"}
 
 
 @pytest.fixture()

@@ -8,3 +8,4 @@ pytest-celery
 pytest-lazy-fixture
 ruff
 python-multipart
+sqlalchemy
