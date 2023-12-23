@@ -1,13 +1,19 @@
+import warnings
 from typing import Optional
 
 from huey import RedisHuey
-from huey.api import Huey, Result, TaskWrapper
+from huey.api import Huey, MemoryHuey, Result, TaskWrapper
+from huey.exceptions import ConfigurationError
 
 from speech_recognition_api.core.async_api.message_bus.interface import TASK_STATUS, IMessageBus
 from speech_recognition_api.core.async_api.worker import process_file
 from speech_recognition_api.extra.huey_bus.config import huey_bus_config
 
-huey = RedisHuey(name=huey_bus_config.name, host=huey_bus_config.redis_host)
+try:
+    huey = RedisHuey(name=huey_bus_config.name, host=huey_bus_config.redis_host)
+except ConfigurationError:
+    warnings.warn("Falling back to in-memory huey, please install redis package to use RedisHuey.", stacklevel=1)
+    huey = MemoryHuey()
 
 
 @huey.task()
