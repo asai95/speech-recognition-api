@@ -1,4 +1,4 @@
--e ".[whisper,gcs,celery,huey]"
+-e ".[whisper,gcs,s3,celery,huey]"
 coverage
 httpx
 mypy
