@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  api:
+    env_file:
+      - .env.example
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api
+    volumes:
+      - "./data:/data"
+    ports:
+      - "8888:8888"
+    depends_on:
+      redis:
+        condition: service_started
+  worker:
+    env_file:
+      - .env.example
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: worker
+    volumes:
+      - "./data:/data"
+    depends_on:
+      api:
+        condition: service_started
+      redis:
+        condition: service_started
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
