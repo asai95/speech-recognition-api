@@ -1,13 +1,13 @@
 from io import BytesIO
 from pathlib import Path
-from typing import IO
+from typing import IO, Union
 from uuid import uuid4
 
 from speech_recognition_api.core.async_api.file_storage.interface import IFileStorage
 
 
 class LocalStorage(IFileStorage):
-    def __init__(self, folder_path: Path | str) -> None:
+    def __init__(self, folder_path: Union[Path, str]) -> None:
         if isinstance(folder_path, str):
             folder_path = Path(folder_path)
         self.folder_path = folder_path  # TODO: add checks
