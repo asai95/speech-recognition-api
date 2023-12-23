@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,8 +8,8 @@ class S3StorageConfig(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore",
     )
-    bucket_name: Optional[str] = None
-    file_prefix: Optional[str] = ""
+    bucket_name: str
+    file_prefix: str = ""
 
 
-s3_storage_config = S3StorageConfig()
+s3_storage_config = S3StorageConfig()  # type: ignore[call-arg]

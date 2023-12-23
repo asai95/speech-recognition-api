@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,7 +8,7 @@ class WhisperModelConfig(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore",
     )
-    name: Optional[str] = None
+    name: str
 
 
-whisper_config = WhisperModelConfig()
+whisper_config = WhisperModelConfig()  # type: ignore[call-arg]

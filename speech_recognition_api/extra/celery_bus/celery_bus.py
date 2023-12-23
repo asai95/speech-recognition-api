@@ -36,3 +36,7 @@ class CeleryMessageBus(IMessageBus):
     def get_task_result(self, task_id: str) -> str:
         result = AsyncResult(task_id, app=self.celery_app)
         return result.get().get("transcription")
+
+    @classmethod
+    def build_from_config(cls) -> "CeleryMessageBus":
+        return CeleryMessageBus()

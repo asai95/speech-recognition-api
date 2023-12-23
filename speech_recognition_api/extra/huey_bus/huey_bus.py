@@ -32,3 +32,7 @@ class HueyMessageBus(IMessageBus):
 
     def get_task_result(self, task_id: str) -> str:
         return self.app.result(task_id, preserve=True).get("transcription")
+
+    @classmethod
+    def build_from_config(cls) -> "HueyMessageBus":
+        return HueyMessageBus()

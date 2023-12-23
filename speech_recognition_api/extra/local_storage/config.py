@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,7 +8,7 @@ class LocalStorageConfig(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore",
     )
-    folder_path: Optional[str] = None
+    folder_path: str = "."
 
 
 local_storage_config = LocalStorageConfig()

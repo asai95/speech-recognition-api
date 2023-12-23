@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,9 +8,9 @@ class GoogleCloudStorageConfig(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore",
     )
-    project_id: Optional[str] = None
-    bucket_name: Optional[str] = None
-    file_prefix: Optional[str] = ""
+    project_id: str
+    bucket_name: str
+    file_prefix: str = ""
 
 
-google_cloud_storage_config = GoogleCloudStorageConfig()
+google_cloud_storage_config = GoogleCloudStorageConfig()  # type: ignore[call-arg]

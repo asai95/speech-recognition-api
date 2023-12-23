@@ -39,9 +39,7 @@ def google_cloud_storage(audio_file_generator):
     mock_bucket = MagicMock()
     mock_bucket.blob.return_value.download_as_bytes.return_value = next(audio_file_generator()).read()
     mock_client.get_bucket.return_value = mock_bucket
-    storage = GoogleCloudStorage()
-    storage.client = mock_client
-    return storage
+    return GoogleCloudStorage(project_id="test", bucket_name="test", client=mock_client)
 
 
 @pytest.fixture()
@@ -54,7 +52,7 @@ def s3_storage(audio_file_generator):
 
     mock_bucket.download_fileobj = load_into_file
     mock_resource.Bucket.return_value = mock_bucket
-    return S3Storage(resource=mock_resource)
+    return S3Storage(bucket_name="test", resource=mock_resource)
 
 
 @pytest.fixture()

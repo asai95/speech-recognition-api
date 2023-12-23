@@ -1,25 +1,4 @@
-from typing import Dict, Optional
-
-from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-
-class FactoryConfig(BaseModel):
-    items: dict[str, str]
-
-
-class AsyncAPIConfig(BaseModel):
-    model_config = SettingsConfigDict(protected_namespaces=())
-
-    model_name: str
-    storage_name: str
-    message_bus_name: str
-
-
-class SyncAPIConfig(BaseModel):
-    model_config = SettingsConfigDict(protected_namespaces=())
-
-    model_name: str
 
 
 class AppConfig(BaseSettings):
@@ -30,14 +9,9 @@ class AppConfig(BaseSettings):
         extra="ignore",
     )
 
-    # Factories
-    models: Optional[Dict[str, str]] = None
-    storages: Optional[Dict[str, str]] = None
-    message_busses: Optional[Dict[str, str]] = None
-
-    # APIs
-    async_api: AsyncAPIConfig
-    sync_api: SyncAPIConfig
+    model: str
+    storage: str
+    message_bus: str
 
 
 app_config = AppConfig()  # type: ignore[call-arg]
