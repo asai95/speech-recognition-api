@@ -14,7 +14,7 @@ def create_app(**fastapi_kwargs: Any) -> FastAPI:  # noqa: ANN401
         fastapi_kwargs["description"] = "Simple but extensible API for Speech Recognition."
 
     if "version" not in fastapi_kwargs:
-        fastapi_kwargs["version"] = "0.1.0"
+        fastapi_kwargs["version"] = "0.1.1"
 
     app = FastAPI(**fastapi_kwargs)
     app.include_router(sync_router)
