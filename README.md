@@ -4,6 +4,12 @@ Simple but extensible API for Speech Recognition.
 
 ### Installation
 
+From pip:
+```bash
+pip install speech_recognition_api[all]
+```
+
+From git:
 ```bash
 git clone https://github.com/asai95/speech-recognition-api.git
 pip install -r requirements.txt
@@ -82,6 +88,47 @@ Returns an object with async task id.
 Returns an object with status and a transcription (if transcription is available).
 [Response model](speech_recognition_api/core/async_api/dto.py).
 
+Async API also requires a worker to run the actual work.
+
 ### Configuring
 
-TODO
+Configuration is done by .env file or env variables (they take preference).
+
+The main variables required for the API and worker to run are:
+
+* `MODEL` - model class path (it will do the actual audio-to-text conversion)
+* `STORAGE` - storage class path (in Async API it will be responsible for uploading/downloading files)
+* `MESSAGE_BUS` - message bus class path (in Async API it will be responsible for sending tasks to
+remoted workers and getting the result back from them)
+
+These classes will be imported only when used for the fist time.
+
+Each class may require its own variables. Please refer to config.py of the specific module
+to get the config reference.
+
+Built-in classes:
+
+Models:
+* [Whisper](speech_recognition_api/extra/whisper_model/whisper_model.py)
+
+Storages:
+* [Local file system](speech_recognition_api/extra/local_storage/local_storage.py)
+* [Amazon S3](speech_recognition_api/extra/s3_storage/s3_storage.py)
+* [Google Cloud Storage](speech_recognition_api/extra/google_cloud_storage/google_cloud_storage.py)
+
+Message Busses:
+* [Celery](speech_recognition_api/extra/celery_bus/celery_bus.py)
+* [Huey](speech_recognition_api/extra/huey_bus/huey_bus.py)
+
+### Extending
+
+It is easy to extend the API by adding models, storages and message busses.
+
+To do that, one can just create a class that implements an interface:
+* [Model](speech_recognition_api/core/common/model/interface.py)
+* [Storage](speech_recognition_api/core/async_api/file_storage/interface.py)
+* [Message Bus](speech_recognition_api/core/async_api/message_bus/interface.py)
+
+Then just add a path to the class to the config file and that's it!
+
+I suggest to distribute new modules through PyPI, so other people could reuse them.
